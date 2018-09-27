@@ -27,7 +27,7 @@ To retrieve the articles, you'll need specific API codes. These are not provided
 
 An empty settings file will be provided where "###" needs to substituted with the corresponding values.
 
-All values (search queries, filenames, screening criterea, ...) can be adjusted in the settings file.
+**All values (search queries, filenames, screening criterea, ...) can be adjusted in the settings file.**
 
 ## Python Libraries
 Python libraries that need to be installed are:
