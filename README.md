@@ -7,12 +7,19 @@ The Literature Screening Tool (LST) is a set of tools that can be helpful to scr
 ## Branches 
 
 The tool consists of 3 branches:  
-
 - the first branch ("Retrieval") retrieves all the articles 
-
-- the second branch ("Screening") screens the articles in a flask app. 
-
+  - pubmedsearch.py
+  - SCOPUSsearch.py
+  - wossearch.py
+  - merging_article_tables.py
+- the second branch ("Screening") screens the articles in a flask app.
+  - LST.py (screening flask app)
+  - output_manager (saves output from LST.py into backup, needs to be run every time LST.py is stopped)
+  - Article_Table.xlsx (Example file that could come out of the retrieval branch)
 - the last branch ("Analysis") analyses the output from the screening process and outputs the results as pkl files or xlsx tables 
+  - Article_Selection_Postcreening.py (aggregates all the files in backup and removes duplicate values.)
+
+It is possible to add your own "Article_Table.xlsx" file, by default it should have the following columns: "ID, Title, Text" .
 
 ## Settings 
 
