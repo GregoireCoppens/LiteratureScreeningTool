@@ -19,3 +19,18 @@ The tool consists of 3 branches:
 To retrieve the articles, you'll need specific API codes. These are not provided and can be required by contacting the corresponding customer services. 
 
 An empty settings file will be provided where "###" needs to substituted with the corresponding values.
+
+## Python Libraries
+Python libraries that need to be installed are:
+- flask
+- pandas
+- numpy
+- Bio
+
+- requests
+- re
+- itertools
+- xml
+
+- time
+- os 
