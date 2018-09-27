@@ -10,7 +10,7 @@ The tool consists of 3 branches:
 
 - the first branch ("Retrieval") retrieves all the articles 
 
-- the second branch ("Screening Tool") screens the articles in a flask app. 
+- the second branch ("Screening") screens the articles in a flask app. 
 
 - the last branch ("Analysis") analyses the output from the screening process and outputs the results as pkl files or xlsx tables 
 
