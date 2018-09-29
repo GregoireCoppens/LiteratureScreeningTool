@@ -50,11 +50,11 @@ df_screened_output["criteria"] = crits
 matches = df_screened_output.loc[
         (df_screened_output["criteria"].astype(str) != '[]')
         & ~(df_screened_output["criteria"].
-            astype(str).str.contains("Not Specific"))
+            astype(str).str.contains("Exclusion Criteria 1"))
         & ~(df_screened_output["criteria"].
-            astype(str).str.contains("No ICU"))
+            astype(str).str.contains"Exclusion Criteria 2"
         & ~(df_screened_output["criteria"].
-            astype(str).str.contains("Different Language")),
+            astype(str).str.contains("Exclusion Criteria 3")),
         'index']
 
 # create final dataframe with the selection of IDs in matches
