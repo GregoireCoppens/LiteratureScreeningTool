@@ -20,4 +20,4 @@ SCOPUS_query = 'TITLE-ABS-KEY ("Medical Informatics")'
 # LST Requirements:
 Article_Table = "Article_Table.csv"
 screeners = "test, experiment"
-filters_all = ["criteria 1", "criteria 2", "criteria 3", "criteria 4", "criteria 5", "criteria 6"]
+filters_all = ["criteria 1", "criteria 2", "criteria 3", "criteria 4", "criteria 5"]
