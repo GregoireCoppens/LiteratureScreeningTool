@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# git update-index --assume-unchanged settings.py
 
 # Pubmed Requirements:
 mail = '###'
