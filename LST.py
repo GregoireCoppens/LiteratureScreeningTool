@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, send_file
 import pandas as pd
 import re
 import settings
@@ -29,11 +29,19 @@ def text_screening(text, screeners_list):
 
 data = {
     'message': feed.loc[:, 'Text'],
+    'message_display': 'block' if settings.message_display else 'none',
     'title': feed.loc[:, 'Title'],
+    'title_display': 'block' if settings.title_display else 'none',
     'id': feed.loc[:, 'ID'],
     'message_screened': str(),
     'max': len(feed.loc[:, 'ID'])
 }
+
+try:
+    data['pdf_name'] = feed.loc[:, 'pdf_name']
+    data['pdf_display'] = 'block' if settings.pdf_display else 'none'
+except KeyError:
+    data['pdf_name'] = ["nan"]*len(feed.loc[:, 'ID'])
 
 screeners = settings.screeners
 filters_all = settings.filters_all
@@ -43,6 +51,13 @@ filters_all = settings.filters_all
 @app.route('/article_screener/')
 def article_redirect():
     return redirect('/article_screener/0')
+
+
+@app.route('/pdf/<pdf_name>', methods=["GET"])
+def show_static_pdf(pdf_name):
+    if pdf_name == "nan":
+        return "No PDF Found"
+    return send_file("./pdf/" + pdf_name + ".pdf")
 
 
 @app.route('/article_screener/<int:article_count>', methods=["POST", "GET"])
@@ -87,4 +102,4 @@ def article_screener(article_count):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

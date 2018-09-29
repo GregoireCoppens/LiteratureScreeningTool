@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
 # git update-index --assume-unchanged settings.py
+# git fetch origin master
+# git reset --hard
+
+# LST Requirements:
+Article_Table = "Article_Table.xlsx"  # columns: ID, Title, Text, pdf_name
+screeners = "test, experiment"  # Elements to highlight in the text
+filters_all = ["criteria 1", "criteria 2", "criteria 3", "criteria 4"]
+
+# Display Settings
+message_display = True
+title_display = True
+pdf_display = True
 
 # Pubmed Requirements:
 mail = '###'
@@ -16,8 +28,3 @@ wos_query = 'TS=("Medical Informatics")'
 SCOPUS_apikey = '###'
 SCOPUS_institutionkey = '###'
 SCOPUS_query = 'TITLE-ABS-KEY ("Medical Informatics")'
-
-# LST Requirements:
-Article_Table = "Article_Table.csv"
-screeners = "test, experiment"
-filters_all = ["criteria 1", "criteria 2", "criteria 3", "criteria 4", "criteria 5"]
