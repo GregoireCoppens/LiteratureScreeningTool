@@ -68,8 +68,8 @@ crit_lst = list(set(
         chain.from_iterable(
             df_screened_output.loc[
                 df_screened_output['index'].isin(matches),
-                'criteria']
-            )))
+                'criteria'])))
+
 # Merge 2 dataframes to include criteria into df
 df = pd.merge(df, df_screened_output,
               how="left", left_on=["ID"], right_on=["index"])
