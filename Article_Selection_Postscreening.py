@@ -46,16 +46,19 @@ for i in range(len(crits)):
         crits[i] = list(crits[i])
 df_screened_output["criteria"] = crits
 
-# select articles that don't contain exclusion criteria or are empty
-matches = df_screened_output.loc[
-        (df_screened_output["criteria"].astype(str) != '[]')
-        & ~(df_screened_output["criteria"].
-            astype(str).str.contains("Exclusion Criteria 1"))
-        & ~(df_screened_output["criteria"].
-            astype(str).str.contains"Exclusion Criteria 2"
-        & ~(df_screened_output["criteria"].
-            astype(str).str.contains("Exclusion Criteria 3")),
-        'index']
+# # select articles that don't contain exclusion criteria or are empty
+# matches = df_screened_output.loc[
+        # (df_screened_output["criteria"].astype(str) != '[]')
+        # & ~(df_screened_output["criteria"].
+            # astype(str).str.contains("Exclusion Criteria 1"))
+        # & ~(df_screened_output["criteria"].
+            # astype(str).str.contains"Exclusion Criteria 2"
+        # & ~(df_screened_output["criteria"].
+            # astype(str).str.contains("Exclusion Criteria 3")),
+        # 'index']
+
+# Bypass exclusion of articles
+matches = df_screened_output.loc[:, 'index']
 
 # create final dataframe with the selection of IDs in matches
 df = df_all.loc[df_all['ID'].isin(matches), :]
@@ -79,10 +82,6 @@ df = df.drop(columns=["index", "criteria", "comments"])
 
 # Select articles that have at least one of the included criteria
 df = df.loc[df.iloc[:, 8:].any(axis=1)].reset_index(drop=True)
-
-# Remove spelling error
-df_screened_output["criteria"] = df_screened_output["criteria"]
-df_screened_output = df_screened_output.drop(columns=["criteria"])
 
 # output new pickle for new screening round
 df.to_pickle("Article_Table_Postscreening.pkl")
