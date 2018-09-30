@@ -28,9 +28,9 @@ def text_screening(text, screeners_list):
 
 
 data = {
-    'message': feed.loc[:, 'Text'],
+    'message': feed.loc[:, 'Text'].fillna(''),
     'message_display': 'block' if settings.message_display else 'none',
-    'title': feed.loc[:, 'Title'],
+    'title': feed.loc[:, 'Title'].fillna(''),
     'title_display': 'block' if settings.title_display else 'none',
     'id': feed.loc[:, 'ID'],
     'message_screened': str(),
