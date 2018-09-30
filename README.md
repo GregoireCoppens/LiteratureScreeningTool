@@ -16,16 +16,25 @@ The tool consists of 3 branches:
   - LST.py (screening flask app)
   - output_manager (saves output from LST.py into backup, needs to be run every time LST.py is stopped)
   - Article_Table.xlsx (Example file that could come out of the retrieval branch)
-- the last branch ("Analysis") analyses the output from the screening process and outputs the results as pkl files or xlsx tables 
+- the last branch ("Analysis") analyses the output from the screening process and outputs the results as pkl files and xlsx tables 
   - Article_Selection_Postcreening.py (aggregates all the files in backup and removes duplicate values.)
 
 It is possible to add your own "Article_Table.xlsx" file, by default it should have the following columns: "ID, Title, Text" .
+It is also possible to change the provided "Article_Table.xlsx" file.
+
+## PDFs
+
+PDFs are accepted. You'll need to add them into the "pdf" folder and their names (without '.pdf') schould be added to the input table in the "pdf_file" column.
 
 ## Settings 
 
 To retrieve the articles, you'll need specific API codes. These are not provided and can be required by contacting the corresponding customer services. 
 
-An empty settings file will be provided where "###" needs to substituted with the corresponding values.
+The display settings can be adjusted in the settings.py file. By setting a display to True, it will be showed.
+
+The name of an input file can be changed in the settings.py file, possible extensions are: ".xlsx", ".csv", ".pkl". The following column names are by default expected: ID, Title, Text, pdf_file ('pdf_file' is not required).
+
+An empty settings file is provided where "###" needs to substituted with the corresponding values.
 
 **All values (search queries, filenames, screening criterea, ...) can be adjusted in the settings file.**
 
