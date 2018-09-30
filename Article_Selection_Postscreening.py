@@ -10,8 +10,10 @@ import numpy as np
 
 # Define data frames
 df_screened_output = pd.DataFrame(columns=['index', 'criteria', 'comments'])
+df_screened_output['index'] = df_screened_output['index'].astype(str)
 
-df_all = pd.read_pickle("Article_Table.pkl")
+df_all = pd.read_excel("Article_Table.xlsx")
+df_all["ID"] = df_all["ID"].astype(str)
 
 # import all datasets
 # http://www.martinbroadhurst.com/listing-all-files-in-a-directory-with-a-certain-extension-in-python.html
@@ -35,6 +37,15 @@ for i in df_screened_output.loc[
             df_screened_output['index'] == i,
             "criteria"]\
         = set(all_screeners)
+    all_comments = str()
+    for j in list(df_screened_output.loc[
+            df_screened_output['index'] == i,
+            "comments"]):
+        all_comments += j + "; "
+    df_screened_output.loc[
+            df_screened_output['index'] == i,
+            "comments"]\
+        = all_comments
 
 # remove duplicates from screener list
 df_screened_output.drop_duplicates(subset="index", inplace=True)
@@ -45,20 +56,25 @@ for i in range(len(crits)):
     if type(crits[i]) == set:
         crits[i] = list(crits[i])
 df_screened_output["criteria"] = crits
+comments = list(df_screened_output["comments"])
+for i in range(len(comments)):
+    if type(comments[i]) == set:
+        comments[i] = list(comments[i])
+df_screened_output["comments"] = comments
 
 # # select articles that don't contain exclusion criteria or are empty
 # matches = df_screened_output.loc[
-        # (df_screened_output["criteria"].astype(str) != '[]')
-        # & ~(df_screened_output["criteria"].
-            # astype(str).str.contains("Exclusion Criteria 1"))
-        # & ~(df_screened_output["criteria"].
-            # astype(str).str.contains"Exclusion Criteria 2"
-        # & ~(df_screened_output["criteria"].
-            # astype(str).str.contains("Exclusion Criteria 3")),
-        # 'index']
+#         (df_screened_output["criteria"].astype(str) != '[]')
+#         & ~(df_screened_output["criteria"].
+#             astype(str).str.contains("Exclusion Criteria 1"))
+#         & ~(df_screened_output["criteria"].
+#             astype(str).str.contains("Exclusion Criteria 2"))
+#         & ~(df_screened_output["criteria"].
+#             astype(str).str.contains("Exclusion Criteria 3")),
+#         'index']
 
 # Bypass exclusion of articles
-matches = df_screened_output.loc[:, 'index']
+matches = list(df_screened_output.loc[:, 'index'])
 
 # create final dataframe with the selection of IDs in matches
 df = df_all.loc[df_all['ID'].isin(matches), :]
@@ -78,7 +94,7 @@ for i in crit_lst:
     df[i] = np.where(df['criteria'].astype(str).str.contains(i), True, False)
 
 # Remove unused columns
-df = df.drop(columns=["index", "criteria", "comments"])
+df = df.drop(columns=["index", "criteria"])
 
 # Select articles that have at least one of the included criteria
 df = df.loc[df.iloc[:, 8:].any(axis=1)].reset_index(drop=True)
